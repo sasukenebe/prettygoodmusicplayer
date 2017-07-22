@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_pgmp_launcher"
@@ -29,6 +28,55 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.CATEGORY_APP_MUSIC" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+                <data android:mimeType="application/itunes"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+                <data android:mimeType="application/itunes"/>
+            </intent-filter>
+            <intent-filter
+                android:priority="-1">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+                <data android:mimeType="application/itunes"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_MUSIC"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" android:pathPattern=".*mp3" android:mimeType="audio/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file"  android:host="*" android:pathPattern=".*\\.mp3" android:mimeType="*/*"  />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern=".*\\.mp3" />
             </intent-filter>
         </activity>
         <activity
@@ -53,16 +101,63 @@
         </activity>
         <!-- The service has android:exported="true" because that's needed for
         control from the notification. Not sure why it causes a warning... -->
-        <service 
+        <service
             android:name="com.smithdtyler.prettygoodmusicplayer.MusicPlaybackService"
             android:icon="@drawable/ic_pgmp_launcher"
             android:exported="true"
         >
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="file" />
+            <data android:host="*" />
+            <data android:scheme="file" android:pathPattern=".*mp3" android:mimeType="audio/*" />
+        </intent-filter>
+        <intent-filter>
+            <data android:scheme="file"
+                android:mimeType="*/*"
+                android:pathPattern=".*\\.mp3"
+                android:host="*"/>
+
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+        </intent-filter>
+            <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="content" />
+            <data android:mimeType="*/*" />
+            <data android:pathPattern=".*\\.mp3" />
+            <data android:pathPattern=".*\\..*\\.mp3" />
+            <data android:pathPattern=".*\\..*\\..*\\.mp3" />
+            <data android:pathPattern=".*\\..*\\..*\\..*\\.mp3" />
+            <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mp3" />
+        </intent-filter>
         </service>
         <receiver android:name="com.smithdtyler.prettygoodmusicplayer.MusicBroadcastReceiver" 
             android:enabled="true">
+
             <intent-filter android:priority="2147483647" >
                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MUSIC_PLAYER"></action>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.mp3" />
+                <data android:pathPattern=".*\\..*\\.mp3" />
+                <data android:pathPattern=".*\\..*\\..*\\.mp3" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.mp3" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mp3" />
             </intent-filter>
         </receiver>
     </application>

@@ -263,7 +263,7 @@ import java.util.Map;
         {
         case KeyEvent.KEYCODE_BACK:
             AlertDialog.Builder ab = new AlertDialog.Builder(ArtistList.this);
-            ab.setMessage("Are you sure?").setPositiveButton("Yes", new OnClickListener(){
+            ab.setMessage("Are you Sure?").setPositiveButton("Yes", new OnClickListener(){
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -274,7 +274,7 @@ import java.util.Map;
 					startService(msgIntent);
 					finish();
 				}
-            	
+
             })
             .setNegativeButton("No", new OnClickListener(){
 
